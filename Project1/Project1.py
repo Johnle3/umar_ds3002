@@ -8,11 +8,16 @@ import mysql.connector
 import sqlite3
 #import sqlite - default in python now
 # %%
-#1.	Fetching the data by ingesting a local file on my computer:
+#I'll be documenting everything as I go.
 
-#read the data
+#1.	Fetching the data by ingesting a local file on my computer:
+    #So we'll start by reading a specific dataset that I found on kaggle.
+    #The file itself is in the GitHub repo.
+
+#read the data using pandas.
 df = pd.read_csv('/Users/Umar/Desktop/School/UVA/Spring2022/DS3002/breast_cancer.csv')
 
+#try-except block prints out an error message if it can't read the file.
 try:    
     df_to_json = df.to_json('/Users/Umar/Desktop/School/UVA/Spring2022/DS3002/breast_cancer.json')
 except:
@@ -42,7 +47,7 @@ print(df.head())
 
 # %%
 
-#4.	Writing JSON
+#4.	Writing JSON to SQL using pandas.
 
 json_file = '/Users/Umar/Desktop/School/UVA/Spring2022/DS3002/breast_cancer.json'
 
