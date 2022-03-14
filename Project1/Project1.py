@@ -5,12 +5,19 @@ import json
 import os
 import pymysql
 import mysql.connector
+import sqlite3
 #import sqlite - default in python now
 # %%
 #1.	Fetching the data by ingesting a local file on my computer:
 
 #read the data
 df = pd.read_csv('/Users/Umar/Desktop/School/UVA/Spring2022/DS3002/breast_cancer.csv')
+
+try:    
+    df_to_json = df.to_json('/Users/Umar/Desktop/School/UVA/Spring2022/DS3002/breast_cancer.json')
+except:
+    print("error!", df_to_json['error']['message'])
+    
 
 #view some of the data
 print(df.head())
@@ -44,6 +51,21 @@ with open(json_file) as f:
 
 df = pd.DataFrame(data)
 #print(df)
+
+conn = sqlite3.connect('test_database')
+c = conn.cursor()
+
+c.execute('CREATE TABLE IF NOT EXISTS cancer (id, radius_mean)')
+conn.commit()
+
+df.to_sql('cancer', conn, if_exists='replace', index = False)
+
+from sqlalchemy import create_engine
+engine = create_engine('sqlite://', echo=False)
+
+#JSON to SQL using
+#df_sql = df.to_sql(df, con=engine)
+#print(df_sql)
 
 with open('json_file', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
