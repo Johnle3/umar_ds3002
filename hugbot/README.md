@@ -7,3 +7,5 @@ This bot works by
 
 4. You can also use the #help tag to remind yourself of what the functions are.
 
+The bot is being hosted through Pythonanywhere.com, specifically at:
+https://www.pythonanywhere.com/user/umarabushaban/consoles/24266689/
